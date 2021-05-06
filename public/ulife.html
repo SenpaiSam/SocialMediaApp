@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uLife</title>
+</head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    [ulife] { 
+        --Background: #051A29;
+        
+        --Primary: 0, 167, 163;
+        
+        --Secondary: 3, 218, 198;
+        /*Typography and iconography*/
+        --OnBackground: 255, 255, 255;
+        --OnSurface: 255, 255, 255;
+        --OnPrimary: 0, 0, 0;
+        --OnSecondary: 0, 0, 0;
+        
+        --hover: brightness(80%);
+        background-color: var(--Background);
+        /* background-color: #181818; */
+        color: rgba(var(--OnBackground),var(--High-emphasis));
+    }
+    body {
+        --padding-component: 1em !important;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-style.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-style.min.css"> -->
+<link rel="stylesheet" href="ulife.css">
+<body ulife>
+    <div name="DEVtools" style="position: absolute;bottom: 1vh;left: 1vw;background-color: rgba(0,  0, 0, 0.5);padding: 1em;">
+        <h3 style="margin: 0; margin-bottom: 0.4em;">Dev Tool</h3>
+        <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
+        <select class="pointer" onchange="themecolor(this.value)">
+            <option value="light">light theme</option>
+            <option value="dark">dark theme</option>
+            <option value="blue">blue theme</option>
+            <option value="skin">skin theme</option>
+            <option value="greyish">greyish theme</option>
+            <option value="ulife" selected>ulife theme</option>
+        </select>
+        <br><br>
+        <p style="margin: 0; margin-bottom: 0.4em;">Toogle Flat Design:</p>
+        <button onclick="flatswitch()">normal/flat Mode Switch</button>
+    </div>
+
+    <div id="Dropdownbg" class="Dropdownbg"></div>
+
+    <div class="image-viewer" onclick="closeImageViewer()">
+        <button style="float: right;" onclick="closeImageViewer()"><span class="material-icons">close</span></button>
+        <div class="iw-image vertical-center">
+            <img class="vertical-center"/>
+        </div>
+    </div>
+
+    <div id="sendmodal" style="display: none;position: absolute;height: 100vh;width: 100vw;z-index: 49;background-color: rgba(0, 0, 0, 80%);">
+        <div class="card vertical-center" style="width: 50vw;margin: 0 auto;background-color: var(--Background);">
+            <a class="tweet-close color-primary" onclick="closeSendModal()"><span class="material-icons paicon" style="top:0.3em">close</span></a>
+            <div style="height: 0.1em;background-color: rgba(var(--OnBackground), var(--dp24));margin: 1em 0 1em 0;"></div>
+            <div class="flex-row">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=3" style="border-radius: 100%;">
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <div class="sr-profile-info flex-row">
+                        <textarea style="width: 100%;height: 30vh;resize: none;" placeholder="Eingabe.." maxlength="200"></textarea>
+                    </div>
+                    <hr>
+                    <div class="sr-profile-info flex-row post-actions" style="margin-top: 1em;">
+                        <a style="height: 2rem;"><span class="material-icons paicon">image</span></a>
+                        <a style="height: 2rem;"><span class="material-icons paicon">place</span></a>
+                        <button class="bcolor-primary bcolor-custom" style="margin-left: auto;order: 2;">Posten</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header" style="position: sticky;top: 0;background-color: var(--Background);z-index: 10;padding: 0;"> <!-- color-primary -->
+        <nav class="flex-wrap" style="background-color: rgba(var(--OnBackground), var(--dp01));padding: var(--padding-component) calc(var(--padding-component) + 1em);">
+            <!-- <img class="nav-img" alt="Logo"> -->
+            <svg height="25" width="80">
+                <text x="0" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 2rem;">U</text><text x="30" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 1.3rem;">LIFE</text>
+              </svg>
+            <div class="nav-collapse flex-wrap">
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="ulife.html" class="nav-link"><span class="material-icons micon">home</span>Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link"><span class="material-icons micon">language</span>Global</a>
+                    </li>
+                    <li>
+                        <a class="nav-link"><span class="material-icons micon">notifications</span>Mitteilungen</a>
+                    </li>
+                </ul>
+                <div id="searchrecommendation">
+                    <input type="search" name="nameinput" id="headersearch" style="width: 100%;" placeholder="Suche.." autocomplete="off"/> <!-- onkeydown="onkeydown1()" onsearch="onsearch1()" -->
+                    <ul class="search-recommendation">
+                        <li>
+                            <input type="hidden" value="Max Musterman @EinAcc">
+                            <div class="sr-profile-item">
+                                <div class="sr-profile-img vertical-center">
+                                    <img src="https://picsum.photos/40?random=8" style="border-radius: 100%;">
+                                </div>
+                                <div class="sr-profile-info">
+                                    <p>Max Musterman <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
+                                    <p>@MaxMusterman</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+                        <li>
+                            <input type="hidden" value="Alex Musterman @kexAcc">
+                            <div class="sr-profile-item">
+                                <div class="sr-profile-img vertical-center">
+                                    <img src="https://picsum.photos/40?random=9" style="border-radius: 100%;">
+                                </div>
+                                <div class="sr-profile-info">
+                                    <p>Alex Musterman der dritte</p>
+                                    <p>@kexAcc</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+                        <li>
+                            <input type="hidden" value="Ben Musterman @tenAcc">
+                            <div class="sr-profile-item">
+                                <div class="sr-profile-img vertical-center">
+                                    <img src="https://picsum.photos/40?random=10" style="border-radius: 100%;">
+                                </div>
+                                <div class="sr-profile-info">
+                                    <p>Ben Musterman <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
+                                    <p>@tenAcc</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+                        <li>
+                            <input type="hidden" value="Zac Musterman @ZacAcc">
+                            <div class="sr-profile-item">
+                                <div class="sr-profile-img vertical-center">
+                                    <img src="https://picsum.photos/40?random=11" style="border-radius: 100%;">
+                                </div>
+                                <div class="sr-profile-info">
+                                    <p>Zac Musterman</p>
+                                    <p>@ZacAcc</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a onclick="openSendModal()" class="nav-link-special">Posten</a>
+        </nav>
+    </header>
+
+    <div class="flex-row" style="width: 70%;margin: 0 auto;align-items: center;justify-content: center;">
+        <div class="main-sticky">
+            <div class="card profile-info">
+                <div class="profile-img">
+                    <img src="https://picsum.photos/200" style="max-height: 10em;height: auto;width: 100%;max-width: 10em;border-radius: 100%;">
+                </div>
+                <div onclick="location.href='profile-settings.html'">
+                    <h3>MyAccount</h3>
+                    <p>@MyAccount</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div id="tweet01" class="card post flex-row" style="width: 100%;">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=1" style="border-radius: 100%;">
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <div class="sr-profile-info flex-row">
+                        <p>Tim Musterman</p>
+                        <p>@TimM</p>
+                        <p>&bull; 1min</p>
+                    </div>
+                    <div style="position: relative;top: -1.7em;">
+                        <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                        <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                            <div class="dropdown-content">
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Content von Tim<br>Was ist das?</p>
+                    <div class="sr-profile-info flex-row post-actions">
+                        <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                        <a><span class="material-icons paicon">repeat</span></a>
+                        <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tweet02" class="card post flex-row" style="width: 100%;">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=2" style="border-radius: 100%;">
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <div class="sr-profile-info flex-row">
+                        <p>Sam Musterman <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
+                        <p>@SamM</p>
+                        <p>&bull; 3min</p>
+                    </div>
+                    <div style="position: relative;top: -1.7em;">
+                        <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                        <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                            <div class="dropdown-content">
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Sam ist nice<br>Alter dieses Bild..</p>
+                    <div class="pointer" style="overflow: hidden;background-color: grey;border-radius: var(--borderradius-component);min-height: 25vh;max-height: 35vh;max-width: 45em;margin-bottom: 1em;">
+                        <img src="https://picsum.photos/600" onclick="openimageviewer('https://picsum.photos/600', this)" style="max-height: 35vh;height: 100%;width: 100%;max-width: 45em;"></div>
+                    <div class="sr-profile-info flex-row post-actions">
+                        <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                        <a><span class="material-icons paicon">repeat</span></a>
+                        <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tweet03" class="card post " style="width: 100%;">
+                <div>
+                    <p class="retweet"><span class="material-icons micon">repeat</span>retweet Max Musterman2</p>
+                </div>
+                <div class="flex-row">
+                    <div class="post-img">
+                        <img src="https://picsum.photos/50?random=3" style="border-radius: 100%;">
+                    </div>
+                    <div class="post-content" style="width: 100%;">
+                        <div class="sr-profile-info flex-row">
+                            <p>Dave Musterman</p>
+                            <p>@DaveM</p>
+                            <p>&bull; 1h</p>
+                        </div>
+                        <div style="position: relative;top: -1.7em;">
+                            <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                            <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                                <div class="dropdown-content">
+                                    <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                    <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Content...<br>OKadkal..</p>
+                        <div class="sr-profile-info flex-row post-actions">
+                            <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                            <a><span class="material-icons paicon">repeat</span></a>
+                            <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tweet04" class="card post flex-row" style="width: 100%;">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=4" style="border-radius: 100%;">
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <div class="sr-profile-info flex-row">
+                        <p>Sarah Musterman</p>
+                        <p>@SarahM</p>
+                        <p>&bull; 2h 10min</p>
+                    </div>
+                    <div style="position: relative;top: -1.7em;">
+                        <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                        <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                            <div class="dropdown-content">
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Schaut was ich gerade mache</p>
+                    <div class="pointer" style="background-color: grey;border-radius: var(--borderradius-component);max-height: 35vh;max-width: 45em;margin-bottom: 1em;">
+                        <img src="https://picsum.photos/400" onclick="openimageviewer('https://picsum.photos/400', this)" style="max-height: 35vh;height: auto;width: 100%;max-width: 45em;"></div>
+                    <div class="sr-profile-info flex-row post-actions">
+                        <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                        <a><span class="material-icons paicon">repeat</span></a>
+                        <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tweet05" class="card post flex-row" style="width: 100%;">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=5" style="border-radius: 100%;">
+                    <div></div>
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <div class="sr-profile-info flex-row">
+                        <p>Lea Musterman</p>
+                        <p>@LeaM</p>
+                        <p>&bull; 2h 40min</p>
+                    </div>
+                    <div style="position: relative;top: -1.7em;">
+                        <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                        <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                            <div class="dropdown-content">
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Meint er da ernst?</p>
+
+                    <div id="rtweet01" class="card post flex-row" style="width: 100%;margin-bottom: 1em;">
+                        <div class="post-img">
+                            <img src="https://picsum.photos/50?random=6" style="border-radius: 100%;">
+                        </div>
+                        <div class="post-content" style="width: 100%;">
+                            <div class="sr-profile-info flex-row">
+                                <p>Leo Musterman</p>
+                                <p>@LeoM</p>
+                                <p>&bull; 3h</p>
+                            </div>
+                            <div style="position: relative;top: -1.7em;">
+                                <a onclick="OpenDropdown(this)" class="post-menu" style="margin-left: auto;order: 2;"><span class="material-icons paicon">more_horiz</span></a>
+                                <div style="position: relative;float: right;top: 1.7em;right: 8em;">
+                                    <div class="dropdown-content">
+                                        <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">block</span><span>Block</span></div></div>
+                                        <div><div style="position: relative;top: -0.5em;"><span class="material-icons micon">report</span><span>Report</span></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Das ist was ich mache</p>
+                            <div class="sr-profile-info flex-row post-actions">
+                                <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                                <a><span class="material-icons paicon">repeat</span></a>
+                                <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sr-profile-info flex-row post-actions">
+                        <a onclick="likePost(this)"><span class="material-icons paicon">favorite_border</span></a>
+                        <a><span class="material-icons paicon">repeat</span></a>
+                        <a><span class="material-icons paicon">chat_bubble_outline</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="main-sticky">
+            <div class="card" style="max-height: 23em;">
+                <h3 style="margin-top: 0.2em;"><span class="material-icons micon">trending_up</span>Trends</h3>
+                <hr>
+                <ul class="recommendation-profiles">
+                    <li value="comp1">
+                        <div class="sr-profile-item-view">
+                            <div class="trends-info">
+                                <p>1 &bull; Trending</p>
+                                <p>#AllesFürNix</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li value="comp2">
+                        <div class="sr-profile-item-view">
+                            <div class="trends-info">
+                                <p>2 &bull; Trending</p>
+                                <p>#PlsContact</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li value="comp3">
+                        <div class="sr-profile-item-view">
+                            <div class="trends-info">
+                                <p>3 &bull; Trending</p>
+                                <p>#DEV</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+            <div class="card" style="margin-top: 2em;max-height: 23em;">
+                <h3 style="margin-top: 0.2em;"><span class="material-icons micon">person</span>Andere</h3>
+                <hr>
+                <ul class="recommendation-profiles">
+                    <li value="Max Musterman">
+                        <div class="sr-profile-item-view">
+                            <div class="sr-profile-img vertical-center">
+                                <img src="https://picsum.photos/40?random=4" style="border-radius: 100%;">
+                            </div>
+                            <div class="sr-profile-info">
+                                <p>Fischer <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
+                                <p>@Fischer</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li value="Max Musterman2">
+                        <div class="sr-profile-item-view">
+                            <div class="sr-profile-img vertical-center">
+                                <img src="https://picsum.photos/40?random=5" style="border-radius: 100%;">
+                            </div>
+                            <div class="sr-profile-info">
+                                <p>Max Musterman</p>
+                                <p>@EinAcc</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li value="Alex Musterman">
+                        <div class="sr-profile-item-view">
+                            <div class="sr-profile-img vertical-center">
+                                <img src="https://picsum.photos/40?random=6" style="border-radius: 100%;">
+                            </div>
+                            <div class="sr-profile-info">
+                                <p>Los Santos Po.. <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
+                                <p>@LSPD</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li value="Max Musterman3">
+                        <div class="sr-profile-item-view">
+                            <div class="sr-profile-img vertical-center">
+                                <img src="https://picsum.photos/40?random=7" style="border-radius: 100%;">
+                            </div>
+                            <div class="sr-profile-info">
+                                <p>Luca Musterman</p>
+                                <p>@LucaM</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-javascript.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-javascript.min.js"></script>
+<script src="ulife.js"></script>
+</html>
