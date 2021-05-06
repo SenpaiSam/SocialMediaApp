@@ -37,22 +37,36 @@ exports.routesConfig = function (app) {
 
 
     app.get('/login', (req, res) => {
-        if (!req.cookies.token) {
-            return res.status(401).send();  
-        } 
-        res.sendFile(path.join(__dirname+'../../public/login.html'));
+        if(req.cookies['auth'] != null) {
+            res.redirect(req.protocol + '://' + req.get('host'));
+        } else {
+            res.sendFile(path.join(__dirname+'../../public/login.html'));
+        }
     });
     app.get('/logout', (req, res)=>{
-        res.clearCookie('userData');
-        res.send('user logout successfully');
+        if(req.cookies['auth'] != null) {
+            res.clearCookie('auth');
+            res.clearCookie('userid');
+            res.redirect(req.protocol + '://' + req.get('host') + '/login');
+        } else {
+            res.redirect(req.protocol + '://' + req.get('host') + '/login');
+        }
     });
 
     app.get('/', (req, res) => {
+        if(req.cookies['auth'] != null) {
             res.sendFile(path.join(__dirname+'../../public/ulife.html'));
+        } else {
+            res.redirect(req.protocol + '://' + req.get('host') + '/login');
         }
-    );
+    });
+
     app.get('/profile', (req, res) => {
+        if(req.cookies['auth'] != null) {
             res.sendFile(path.join(__dirname+'../../public/profile-settings.html'));
+        } else {
+            // console.log(req.protocol + '://' + req.get('host') + req.originalUrl);
+            res.redirect(req.protocol + '://' + req.get('host') + '/login');
         }
-    );
+    });
 };

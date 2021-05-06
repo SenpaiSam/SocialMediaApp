@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const AuthorizationRouter = require('./authorization/routes.config');
 const UsersRouter = require('./users/routes.config');
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -24,8 +27,9 @@ app.use(bodyParser.json());
 AuthorizationRouter.routesConfig(app);
 UsersRouter.routesConfig(app);
 
+
 // public files test
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.listen(config.port, function () {
     console.log('app listening at port %s', config.port);
