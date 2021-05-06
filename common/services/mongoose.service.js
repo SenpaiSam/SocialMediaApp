@@ -8,20 +8,18 @@ const options = {
     bufferMaxEntries: 0,
     // all other approaches are now deprecated by MongoDB:
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
+    useUnifiedTopology: true
+    
 };
 
-var url = "mongodb+srv://tourguide:guide02@cluster0.0bkqq.mongodb.net/Cluster0?retryWrites=true&w=majority"; //"mongodb://localhost:27017/rest-tutorial"
-
+var url = 'mongodb+srv://Samuel:admin2002@cluster0.0bkqq.mongodb.net/cluster0?retryWrites=true&w=majority'; //"mongodb://localhost:27017/rest-tutorial"
 const connectWithRetry = () => {
     console.log('MongoDB connection with retry')
     mongoose.connect(url, options).then(()=>{
         console.log('MongoDB is connected')
     }).catch(err=>{
-        // console.log(err.reason);
         console.log('MongoDB connection unsuccessful, retry after 5 seconds. ', ++count);
-        setTimeout(connectWithRetry, 5000);
+        setTimeout(connectWithRetry, 5000)
     })
 };
 

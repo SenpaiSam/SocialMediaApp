@@ -6,7 +6,7 @@ exports.routesConfig = function (app) {
     app.post('/auth', [
         VerifyUserMiddleware.hasAuthValidFields,
         VerifyUserMiddleware.isPasswordAndUserMatch,
-        AuthorizationController.login,
+        AuthorizationController.login
     ]);
 
     app.post('/auth/refresh', [

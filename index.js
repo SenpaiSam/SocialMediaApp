@@ -7,8 +7,6 @@ const bodyParser = require('body-parser');
 const AuthorizationRouter = require('./authorization/routes.config');
 const UsersRouter = require('./users/routes.config');
 
-app.use(express.static('public'));
-
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -27,7 +25,6 @@ AuthorizationRouter.routesConfig(app);
 UsersRouter.routesConfig(app);
 
 
-var hostname = '127.0.0.1';
-app.listen(config.port, hostname, function () {
-    console.log(`Server running at http://${hostname}:${config.port}/`);
+app.listen(config.port, function () {
+    console.log('app listening at port %s', config.port);
 });
