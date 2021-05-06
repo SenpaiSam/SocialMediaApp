@@ -7,15 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/makinhs/rest-api-tutorial.git"
-  },
+  "repository": {},
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/makinhs/rest-api-tutorial/issues"
-  },
+  "bugs": {},
   "homepage": "https://github.com/makinhs/rest-api-tutorial#readme",
   "dependencies": {
     "body-parser": "1.19.0",

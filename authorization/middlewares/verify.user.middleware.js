@@ -28,6 +28,7 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
             if(!user[0]){
                 res.status(404).send({});
             }else{
+                res.setHeader('Set-Cookie', cookie.serialize('user_id', user[0]._id));
                 let passwordFields = user[0].password.split('$');
                 let salt = passwordFields[0];
                 let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
