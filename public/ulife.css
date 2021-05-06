@@ -1,0 +1,363 @@
+.nav-link:hover {
+    text-decoration: underline rgba(var(--OnBackground), var(--Medium-emphasis)); 
+}
+.nav-link {
+    padding: 0.5em !important;
+}
+
+hr {
+    display: none;
+}
+
+/*
+	Input Search with recommendation
+*/
+
+#searchrecommendation {
+    width: 25%;
+    margin-right: 1rem;
+}
+
+.search-recommendation {
+    display: none;
+    z-index: 2;
+    position: absolute;
+	background-color: var(--Background);
+	box-shadow: var(--component-shadow);
+	list-style: none;
+	padding: 0;
+	margin-top: 1em;
+	border-radius: var(--borderradius-component);
+	border: 1px solid grey;
+    max-height: 300px;
+    width: 21.5vw;
+}
+
+.search-recommendation > li {
+	margin-bottom: 0.5em;
+	color: rgba(var(--OnBackground), var(--High-emphasis));
+    margin: 0;
+}
+
+.search-recommendation > li > hr {
+	margin: 0;
+}
+
+/*
+	Profile info
+*/
+
+.sr-profile-item {
+	height: 4em;
+	padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.sr-profile-item-view {
+	height: 4em;
+	padding: 1em 0 1em 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-center {
+    position: relative;
+	margin: 0;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.sr-profile-img {
+    background-color: grey;
+	width: 2.5em;
+	height: 2.5em;
+    margin-right: 0.5em;
+    border-radius: 100%;
+}
+
+.sr-profile-info {
+    cursor: pointer;
+}
+
+.sr-profile-info > * {
+    margin: 0;
+}
+
+.sr-profile-info:hover > :nth-child(1) {
+    text-decoration: underline rgba(var(--OnBackground), var(--Medium-emphasis)); 
+}
+
+.sr-profile-info p:first-child {
+    font-size: 1em;
+}
+
+.sr-profile-info p:last-child {
+    font-size: 0.7em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+/*
+	stuff
+*/
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-sticky {
+    /* background-color: rgba(var(--OnBackground), var(--dp06)); */
+    /* position: sticky; */
+    padding: 1.5em;
+    height: 100vh;
+    align-self: flex-start;
+    top: 0;
+}
+
+.main-content {
+    min-width: 25em;
+    padding: 0.5em;
+    /* pad: 40px 60px; */
+}
+
+/*
+	Search Profiel
+*/
+
+.profile-info {
+    text-align: center;
+    max-height: 50vh;
+}
+
+.profile-img  {
+    background-color: grey;
+    min-height: 10em;
+    min-width: 10em;
+    border-radius: 100%;
+    max-height: 10em;
+    overflow: hidden;
+}
+
+.profile-info h3 {
+    margin-bottom: 0.2em;
+    cursor: pointer;
+}
+
+.profile-info p {
+    font-size: 0.8em;
+    margin: 0;
+    cursor: pointer;
+} 
+
+.profile-info div:hover > :nth-child(1) {
+    text-decoration: underline rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+
+
+.recommendation-profiles {
+    z-index: 2;
+	/* background-color: var(--Background); */
+	/* border: 1px solid grey; */
+	/* box-shadow: var(--component-shadow); */
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-radius: var(--borderradius-component);
+}
+
+.recommendation-profiles > li > * {
+    margin: 0;
+}
+
+
+.micon {
+    position: relative;
+    top: 0.2em;
+    margin-right: 0.3em;
+}
+
+.paicon {
+    position: relative;
+    top: 0.1em;
+}
+
+/*
+    Image viewer
+*/
+
+.image-viewer {
+    display: none;
+    position: absolute;
+    z-index: 50;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 80%);
+    filter: blur(80);
+}
+
+.iw-image {
+    /* background-color: bisque; */
+    height: 90vh;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.iw-image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+/*
+    Trends
+*/
+
+.trends-info {
+    cursor: pointer;
+}
+
+.trends-info > * {
+    margin: 0;
+}
+
+.trends-info:hover > :nth-child(2) {
+    text-decoration: underline rgba(var(--OnBackground), var(--Medium-emphasis)); 
+}
+
+.trends-info p:first-child {
+    font-size: 0.7em;
+    margin-bottom: 0.5em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.trends-info p:last-child {
+    font-size: 1em;
+}
+
+
+/*
+    Tweet
+*/
+
+.post {
+    margin-top: 1em;
+}
+
+.post-img {
+    width: 3em;
+    margin-right: 1em;
+}
+
+.post-img div:first-child {
+    background-color: grey;
+    min-height: 3em;
+    min-width: 3em;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+
+.post-content > div > p {
+    margin-right: 0.3em;
+}
+
+.post-content > div > p:nth-child(2) {
+    font-size: 0.8em;
+    position: relative;
+    top: 0.19em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.post-content > div > p:nth-child(3) {
+    font-size: 0.8em;
+    position: relative;
+    top: 0.19em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.post-content > p {
+    font-size: 0.8em;
+    line-height: 1.5em;
+}
+
+.post-actions > a {
+    user-select: none;
+    cursor: pointer;
+    margin-right: 0.5em;
+    border-radius: 100%;
+    padding: 0.4em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.post-actions > a > span {
+    font-size: 1.2em;
+}
+
+.post-actions > *:hover {
+    background-color: rgba(var(--OnBackground), var(--dp06));
+}
+
+.post-actions > :nth-child(1):hover {
+    color: red;
+    background-color: rgba(255, 0, 0, var(--dp06));
+}
+
+.post-actions > :nth-child(2):hover {
+    color: rgb(126, 184, 40);
+    background-color: rgba(126, 184, 40, var(--dp06));
+}
+
+.post-actions > :nth-child(3):hover {
+    color: rgb(var(--Primary));
+    background-color: rgba(var(--Primary), var(--dp06));
+}
+
+.post-liked > span {
+    color: red;
+}
+
+.retweet {
+    margin-left: 3.5em;
+    margin-top: 0;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.retweet > span {
+    font-size: 1.2em;
+}
+
+.post-menu {
+    position: relative;
+    float: right;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 0.4em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+}
+
+.post-menu:hover {
+    color: rgb(var(--Primary));
+    background-color: rgba(var(--Primary), var(--dp06));
+}
+
+
+
+.tweet-close {
+    user-select: none;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 0.4em;
+    color: rgba(var(--OnBackground), var(--Medium-emphasis));
+    height: 2rem;
+}
+
+.tweet-close:hover {
+    color: rgb(var(--Primary));
+    background-color: rgba(var(--Primary), var(--dp06));
+}

@@ -24,6 +24,8 @@ app.use(bodyParser.json());
 AuthorizationRouter.routesConfig(app);
 UsersRouter.routesConfig(app);
 
+// public files test
+// app.use(express.static('public'));
 
 app.listen(config.port, function () {
     console.log('app listening at port %s', config.port);

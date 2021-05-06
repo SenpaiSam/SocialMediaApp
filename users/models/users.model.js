@@ -2,11 +2,17 @@ const mongoose = require('../../common/services/mongoose.service').mongoose;
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    firstName: String,
-    lastName: String,
+    userName: String,
+    profileName: String,
     email: String,
     password: String,
-    permissionLevel: Number
+    phone: Number,
+    permissionLevel: Number,
+    registerDate: Date,
+    birthday: Date,
+    bio: String,
+    location: String,
+    website: String
 });
 
 userSchema.virtual('id').get(function () {
@@ -33,6 +39,7 @@ exports.findById = (id) => {
         .then((result) => {
             result = result.toJSON();
             delete result._id;
+            delete result.password;
             delete result.__v;
             return result;
         });
@@ -52,6 +59,7 @@ exports.list = (perPage, page) => {
                 if (err) {
                     reject(err);
                 } else {
+                    delete users.password;
                     resolve(users);
                 }
             })
@@ -76,3 +84,26 @@ exports.removeById = (userId) => {
     });
 };
 
+exports.checkEmailAvailable = (emailtocheck) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({ email: `${emailtocheck}` }, (err, result) => {
+            if(result == null) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.checkNameAvailable = (nametocheck) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({ name: `${nametocheck}` }, (err, result) => {
+            if(result == null) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};

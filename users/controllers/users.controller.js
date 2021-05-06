@@ -8,10 +8,17 @@ exports.insert = (req, res) => {
     let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
     req.body.password = salt + "$" + hash;
     req.body.permissionLevel = 1;
-    UserModel.createUser(req.body)
-        .then((result) => {
-            res.status(201).send({id: result._id});
-        });
+    
+    UserModel.checkEmailAvailable(req.body.email)
+        .then(() => {
+            res.status(406).send({email: "not available"});
+        }).catch(() => {
+            // res.status(201).send({account: "created"}); 
+            UserModel.createUser(req.body)
+                .then((result) => {
+                    res.status(201).send({id: result._id});
+                });
+    });
 };
 
 exports.list = (req, res) => {
@@ -41,14 +48,15 @@ exports.patchById = (req, res) => {
         let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
         req.body.password = salt + "$" + hash;
     }
-    // if (req.body.permissionLevel) {
-    //     console.log("Permission changed!");
-    //     if(PermissionMiddleware.minimumPermissionLevelRequired(config.permissionLevels.ADMIN)){
-    //         console.log("kein Admin!");
-    //         res.status(403).send({});
-    //         return;
-    //     }
-    // }
+    console.log("Permission changed!");
+    if (req.body.permissionLevel) {
+        console.log("Permission changed!");
+        // if(PermissionMiddleware.minimumPermissionLevelRequired(config.permissionLevels.ADMIN)){
+        //     console.log("kein Admin!");
+        //     res.status(403).send({permission: "no permission (admin needed)"});
+        //     return;
+        // }
+    }
     
     UserModel.patchUser(req.params.userId, req.body)
         .then((result) => {

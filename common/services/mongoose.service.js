@@ -8,8 +8,8 @@ const options = {
     bufferMaxEntries: 0,
     // all other approaches are now deprecated by MongoDB:
     useNewUrlParser: true,
-    useUnifiedTopology: true
-    
+    useUnifiedTopology: true,
+    useFindAndModify: false
 };
 
 var url = 'mongodb+srv://Samuel:admin2002@cluster0.0bkqq.mongodb.net/cluster0?retryWrites=true&w=majority'; //"mongodb://localhost:27017/rest-tutorial"
