@@ -36,6 +36,9 @@ exports.findByEmail = (email) => {
 };
 
 exports.findById = (id) => {
+    // if(!mongoose.Types.ObjectId.isValid(id)) {
+    //     console.log("id not valid");return;
+    // }
     return User.findById(id)
         .then((result) => {
             result = result.toJSON();

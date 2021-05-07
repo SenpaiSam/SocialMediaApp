@@ -161,8 +161,8 @@
                     <img src="https://picsum.photos/200" style="max-height: 10em;height: auto;width: 100%;max-width: 10em;border-radius: 100%;">
                 </div>
                 <div>
-                    <h3>MyAccount</h3>
-                    <p>@MyAccount</p>
+                    <h3 id="cprofilename">MyAccount</h3>
+                    <p id="cusername">@MyAccount</p>
                 </div>
             </div>
         </div>
@@ -182,7 +182,10 @@
                     <label>New Password:</label>
                     <input id="password" type="password" placeholder="Password" style="width: 100%;">
                     <br><br>
-                    <button>Bearbeiten</button>
+                    <label>Birthday:</label>
+                    <input id="birthday" type="date" placeholder="Birthday" style="width: 100%;">
+                    <br><br>
+                    <!-- <button>Bearbeiten</button> -->
                     <button type="submit">Speichern</button>
                 </form>
             </div>
@@ -198,6 +201,9 @@
                     <label>Teleon:</label>
                     <input id="phone" type="tel" placeholder="Telefon" style="width: 100%;">
                     <br><br>
+                    <label>Ort:</label>
+                    <input id="location" placeholder="Ort" style="width: 100%;">
+                    <br><br>
                     <button type="submit">Speichern</button>
                 </form>
             </div>
@@ -207,8 +213,8 @@
 <!-- <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-javascript.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-javascript.min.js"></script>
-<!-- <script src="ulife.js"></script> -->
-<script>
+<script src="ulife.js"></script>
+<script>  
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -222,17 +228,22 @@
             method: 'GET',
             contentType: 'application/json',
             headers: {
-                "Authorization": `Bearer ${getCookie("auth")}`
+                "Authorization": `Bearer ${getCookie('auth')}`
             },
             success: function(response){
-                // console.log(response);
                 try {
+                    $('#cusername').val(response.userName);
+                    $('#cprofilename').val(response.profileName);
+
                     $('#username').val(response.userName);
                     $('#profilename').val(response.profileName);
                     $('#email').val(response.email);
                     $('#bio').val(response.bio);
                     $('#website').val(response.website);
                     $('#phone').val(response.phone);
+                    $('#location').val(response.location);
+                    let birthdaydate = new Date(response.birthday);
+                    $('#birthday').val(birthdaydate.toISOString().split('T')[0]);
                 } catch (e) {
                     console.log(e);
                 }
@@ -241,7 +252,7 @@
     });
     
     $("#accountsettings").on("submit", (event) => {
-        let changeData = {userName: $('#username').val(), profileName: $('#profilename').val(),email: $('#email').val()};
+        let changeData = {userName: $('#username').val(), profileName: $('#profilename').val(),email: $('#email').val(), birthday: $('#birthday').val()};
         $.ajax({
             url: window.location.protocol + "//" + window.location.host + `/users/${getCookie("userid")}`, 
             method: 'PATCH',
@@ -249,10 +260,7 @@
             headers: {
                 "Authorization": `Bearer ${getCookie("auth")}`
             },
-            data: JSON.stringify(changeData),
-            success: function(response){
-                console.log(response);
-            }
+            data: JSON.stringify(changeData)
         });
         return false;
     });
@@ -266,10 +274,7 @@
             headers: {
                 "Authorization": `Bearer ${getCookie("auth")}`
             },
-            data: JSON.stringify(changeData)//,
-            // success: function(response){
-            //     console.log(response);
-            // }
+            data: JSON.stringify(changeData)
         });
         return false;
     });

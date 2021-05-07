@@ -13,8 +13,10 @@ exports.login = (req, res) => {
         let b = Buffer.from(hash);
         let refresh_token = b.toString('base64');
 
-        res.setHeader('Set-Cookie', `auth=${token}`);
         res.setHeader('Set-Cookie', `userid=${req.body.userId}`);
+        // res.setHeader('Set-Cookie', `auth=${token}`);
+        // res.cookie('userid', req.body.userId);
+        res.cookie('auth', token);
         // res.status(201).send({accessToken: token, refreshToken: refresh_token});
         res.status(201).send();
     } catch (err) {

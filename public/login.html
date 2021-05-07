@@ -78,18 +78,11 @@
 <!-- <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-javascript.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-javascript.min.js"></script>
-<script>    
+<script src="ulife.js"></script>
+<script>
     $(document).ready(() => {
-        function setCookie(cookievalue){
-            // var date = new Date("Februari 10, 2013");
-            // var dateString = date.toGMTString();
-            // var cookieString = "Css=document.getElementById("css").href" + dateString;
-            document.cookie = "auth=" + cookievalue;
-        }
-
         $("#frm_login").on("submit", (event) => {
             var formData = { email: $('#email').val(), password: $('#password').val() };
-            console.log(formData);
 
             $.ajax({
                 url: window.location.protocol + "//" + window.location.host + '/auth', 
@@ -97,7 +90,6 @@
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function(response){
-                    setCookie(response);
                     location.href= window.location.protocol + "//" + window.location.host + "/profile"; // TODO: only redirect to host
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

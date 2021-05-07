@@ -1,48 +1,59 @@
 //Add colortheme
 addthemecolor('ulife');
 
-var search = document.getElementById('headersearch');
+// function setCookie(cookiename,cookievalue){
+//     document.cookie = cookiename + "=" + cookievalue;
+// }
 
-search.addEventListener('focusout', (event) => {
-    search.parentNode.children[1].style.display = 'none';
-});
-
-search.addEventListener('search', (event) => {
-    search.parentNode.children[1].style.display = 'none';
-});
-
-search.addEventListener('keydown', (event) => {
-    if(event.keyCode === 13) {
-        console.log(search.value);
-    }
-    headersearch();
-});
-
-function headersearch() {
-    search.parentNode.children[1].style.display = 'block';
-
-    // Declare variables
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('headersearch');
-    filter = input.value.toUpperCase();
-    ul = document.getElementsByClassName("search-recommendation")[0];
-    li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        // a = li[i].getElementsByTagName("p")[0];
-        // txtValue = a.textContent || a.innerText;
-        a = li[i].getElementsByTagName("input")[0];
-        txtValue = a.value;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
+if(document.getElementById('headersearch') != null) {
+    var search = document.getElementById('headersearch');
+    
+    search.addEventListener('focusout', (event) => {
+        search.parentNode.children[1].style.display = 'none';
+    });
+    
+    search.addEventListener('search', (event) => {
+        search.parentNode.children[1].style.display = 'none';
+    });
+    
+    search.addEventListener('keydown', (event) => {
+        if(event.keyCode === 13) {
+            console.log(search.value);
+        }
+        headersearch();
+    });
+    
+    function headersearch() {
+        search.parentNode.children[1].style.display = 'block';
+    
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('headersearch');
+        filter = input.value.toUpperCase();
+        ul = document.getElementsByClassName("search-recommendation")[0];
+        li = ul.getElementsByTagName('li');
+    
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            // a = li[i].getElementsByTagName("p")[0];
+            // txtValue = a.textContent || a.innerText;
+            a = li[i].getElementsByTagName("input")[0];
+            txtValue = a.value;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
         }
     }
 }
 
-var sendmodal = document.getElementById('sendmodal');
+try {
+    var sendmodal = document.getElementById('sendmodal');
+} catch(e) {
+    //console.log(e);
+}
+
 var lastscrollheight;
 function closeSendModal() {
     sendmodal.style.display = 'none';
@@ -62,7 +73,7 @@ try {
     var imageviewer = document.getElementsByClassName('image-viewer')[0];
     var img = imageviewer.getElementsByTagName('img')[0];
 } catch(e) {
-    console.log(e);
+    //console.log(e);
 }
 
 var lookingattweet;

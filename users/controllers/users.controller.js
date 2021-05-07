@@ -8,12 +8,12 @@ exports.insert = (req, res) => {
     let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
     req.body.password = salt + "$" + hash;
     req.body.permissionLevel = 1;
-    req.body.phone = 0;
-    req.body.registerDate = 0;
-    req.body.birthday = 0;
-    req.body.bio = '';
-    req.body.location = '';
-    req.body.website = '';
+    req.body.phone = null;
+    req.body.registerDate = new Date();
+    req.body.birthday = null;
+    req.body.bio = null;
+    req.body.location = null;
+    req.body.website = null;
 
     UserModel.checkEmailAvailable(req.body.email)
         .then(() => {
