@@ -111,13 +111,14 @@ hr {
     /* background-color: rgba(var(--OnBackground), var(--dp06)); */
     /* position: sticky; */
     padding: 1.5em;
-    height: 100vh;
+    min-width: 15em;
+    /* height: 100vh; */
     align-self: flex-start;
     top: 0;
 }
 
 .main-content {
-    min-width: 25em;
+    min-width: 35em;
     padding: 0.5em;
     /* pad: 40px 60px; */
 }
@@ -260,23 +261,24 @@ hr {
     margin: 0 auto;
 }
 
-.post-content > div > p {
+.post-info > p {
     margin-right: 0.3em;
 }
 
-.post-content > div > p:nth-child(2) {
+.post-info > p:nth-child(2) {
     font-size: 0.8em;
     position: relative;
     top: 0.19em;
     color: rgba(var(--OnBackground), var(--Medium-emphasis));
 }
 
-.post-content > div > p:nth-child(3) {
+.post-info > p:nth-child(3) {
     font-size: 0.8em;
     position: relative;
     top: 0.19em;
     color: rgba(var(--OnBackground), var(--Medium-emphasis));
 }
+
 
 .post-content > p {
     font-size: 0.8em;

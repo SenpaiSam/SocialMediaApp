@@ -8,11 +8,15 @@ const userSchema = new Schema({
     password: String,
     phone: Number,
     permissionLevel: Number,
+    verified: Boolean,
     registerDate: Date,
     birthday: Date,
     bio: String,
     location: String,
-    website: String
+    website: String,
+    follower: Array,
+    follow: Array,
+    notifications: Array
 });
 
 userSchema.virtual('id').get(function () {
@@ -110,4 +114,13 @@ exports.checkNameAvailable = (nametocheck) => {
             }
         });
     });
+};
+
+exports.addfollowUser = (id, followerid) => {
+    return Promise.all([User.findOneAndUpdate({
+        _id: id
+    }, {$push: {follow: followerid}}),
+    User.findOneAndUpdate({
+        _id: followerid
+    }, {$push: {follower: id, notifications: {userid: id, action: 'like', message: null, timestamp: new Date()}}})])
 };

@@ -5,6 +5,12 @@ addthemecolor('ulife');
 //     document.cookie = cookiename + "=" + cookievalue;
 // }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 if(document.getElementById('headersearch') != null) {
     var search = document.getElementById('headersearch');
     
@@ -92,17 +98,4 @@ function openimageviewer(imgurl, element) {
     imageviewer.style.display = 'block';
     document.body.style.overflow = 'hidden';
     img.src = imgurl;
-}
-
-function likePost(element) {
-    let postid = element.parentNode.parentNode.parentNode.id;
-    let icon = element.children[0];
-    // console.log(postid, element.children[0]);
-    if(element.classList.contains('post-liked')) {
-        icon.innerHTML = "favorite_border";
-        element.classList.remove('post-liked');
-    } else {
-        icon.innerHTML = "favorite";
-        element.classList.add('post-liked');
-    }
 }

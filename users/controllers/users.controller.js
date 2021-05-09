@@ -8,6 +8,7 @@ exports.insert = (req, res) => {
     let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
     req.body.password = salt + "$" + hash;
     req.body.permissionLevel = 1;
+    req.body.verified = false;
     req.body.phone = null;
     req.body.registerDate = new Date();
     req.body.birthday = null;
@@ -78,4 +79,35 @@ exports.removeById = (req, res) => {
                 res.status(204).send({});
             });
     }
+};
+
+
+exports.getByIdUserData = (req, res) => {
+    UserModel.findById(req.params.userId)
+        .then((result) => {
+            delete result.email;
+            res.status(200).send(result);
+        });
+};
+
+exports.followUser = (req, res) => {
+    new Promise((resolve, reject) => {
+        UserModel.findById(req.params.userId)
+            .then((result) => {
+                delete result.email;
+                for (let index = 0; index < result.follow.length; index++) {
+                    if(result.follow[index] == req.params.followerid) {
+                        return reject();
+                    }
+                }
+                resolve();
+            })
+        }).then(() => {
+            UserModel.addfollowUser(req.params.userId, req.params.followerid)
+            .then(() => {
+                res.status(200).send({});
+            });}
+        ).catch(() => {
+            res.status(304).send({});
+        });
 };

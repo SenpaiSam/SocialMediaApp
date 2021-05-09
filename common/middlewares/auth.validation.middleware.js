@@ -36,6 +36,14 @@ exports.validJWTNeeded = (req, res, next) => {
         } catch (err) {
             return res.status(403).send();
         }
+    } else if (req.cookies['auth']) {
+        try {
+            req.jwt = jwt.verify(req.cookies['auth'], secret);
+            return next();
+        } catch (err) {
+            console.log("per")
+            return res.status(403).send();
+        }
     } else {
         return res.status(401).send();
     }
