@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uLife</title>
+</head>
+
+<body>
+
+    <div id="Dropdownbg" class="Dropdownbg"></div>
+
+    <div class="image-viewer" onclick="closeImageViewer()">
+        <button style="float: right;" onclick="closeImageViewer()"><span class="material-icons">close</span></button>
+        <div class="iw-image vertical-center">
+            <img class="vertical-center"/>
+        </div>
+    </div>
+
+
+
+    <div id="sendmodal" style="display: none;position: absolute;height: 100vh;width: 100vw;z-index: 49;background-color: rgba(0, 0, 0, 80%);">
+        <div class="card vertical-center" style="width: 50vw;margin: 0 auto;background-color: var(--Background);">
+            <a class="tweet-close color-primary" onclick="closeSendModal()"><span class="material-icons paicon" style="top:0.3em">close</span></a>
+            <div style="height: 0.1em;background-color: rgba(var(--OnBackground), var(--dp24));margin: 1em 0 1em 0;"></div>
+            <div class="flex-row">
+                <div class="post-img">
+                    <img src="https://picsum.photos/50?random=3" style="border-radius: 100%;">
+                </div>
+                <div class="post-content" style="width: 100%;">
+                    <form id="createpostform" enctype="multipart/form-data">     
+                        <div class="sr-profile-info flex-row">
+                            <textarea id="create_postcontent" style="width: 100%;height: 20vh;resize: none;" placeholder="Eingabe.." maxlength="200"></textarea>
+                        </div>
+                        <div id="create_repost_showcase"></div>
+                        <!-- <hr> -->
+                        <div class="sr-profile-info flex-row post-actions" style="margin-top: 1em;">
+                            <a style="height: 2rem;"><span class="material-icons paicon">image</span></a>
+                            <a style="height: 2rem;"><span class="material-icons paicon">place</span></a>
+                            <button type="submit" id="create_postbutton" class="bcolor-primary bcolor-custom" style="margin-left: auto;order: 2;">Posten</button>
+                            <input id="create_image_post" type="file" name="postimg" accept=".jpg">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="designmodal" style="display: none;position: absolute;height: 100vh;width: 100vw;z-index: 49;background-color: rgba(0, 0, 0, 80%);">
+        <button style="float: right;" onclick="closeDesignModal()"><span class="material-icons">close</span></button>
+        <div class="card vertical-center" style="width: 50vw;margin: 0 auto;background-color: var(--Background);">
+            <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
+            <select class="pointer" onchange="themecolor(this.value)">
+                <option value="light">light theme</option>
+                <option value="dark">dark theme</option>
+                <option value="blue">blue theme</option>
+                <option value="skin">skin theme</option>
+                <option value="greyish">greyish theme</option>
+                <option value="ulife" selected>ulife theme</option>
+            </select>
+            <br><br>
+            <p style="margin: 0; margin-bottom: 0.4em;">Toogle Flat Design:</p>
+            <button onclick="flatswitch()">normal/flat Mode Switch</button>
+        </div>
+    </div>
+
+
+
+    <header class="header" style="position: sticky;top: 0;background-color: var(--Background);z-index: 10;padding: 0;"> <!-- color-primary -->
+        <nav class="flex-wrap" style="background-color: rgba(var(--OnBackground), var(--dp01));padding: var(--padding-component) calc(var(--padding-component) + 1em);">
+            <!-- <img class="nav-img" alt="Logo"> -->
+            <svg height="25" width="80">
+                <text x="0" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 2rem;">U</text><text x="30" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 1.3rem;">LIFE</text>
+              </svg>
+            <div class="nav-collapse flex-wrap">
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="/" class="nav-link"><span class="material-icons micon">home</span>Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link"><span class="material-icons micon">language</span>Global</a>
+                    </li>
+                    <li>
+                        <a id="notifications_btn" class="nav-link"><span class="material-icons micon">notifications</span>Mitteilungen</a>
+                    </li>
+                </ul>
+                <div id="searchrecommendation">
+                    <input type="search" name="nameinput" id="headersearch" style="width: 100%;" placeholder="Suche.." autocomplete="off"/> <!-- onkeydown="onkeydown1()" onsearch="onsearch1()" -->
+                    <ul class="search-recommendation"></ul>
+                </div>
+            </div>
+            <a onclick="openSendModal()" class="nav-link-special">Posten</a>
+        </nav>
+    </header>
+
+
+
+
+    <div class="main-sticky">
+        <div class="card profile-info">
+            <div class="profile-img">
+                <img id="UserImageView" src="" style="height: 10em;width: 10em;border-radius: 100%;">
+            </div>
+            <div id="leftProfileClick">
+                <h3 id="myProfileName">MyAccount</h3>
+                <p id="myUserName">@MyAccount</p>
+            </div>
+        </div>
+        <!-- User -->
+        <div class="card" id="profile-info-card" style="margin-top: 1em;">
+            <p id="cbirthday"></p>
+            <p id="cwebsite"></p>
+            <p id="clocation"></p>
+            <p id="cphone"></p>
+        </div>
+        <button id="btn_profilesettings" onclick="userProfile()" style="width: 100%; margin-top: 1em;">Profile Settings</button>
+        <button id="btn_follow" class="bcolor-custom bcolor-primary" onclick="userFollow()" style="width: 100%; margin-top: 1em;">Follow</button>
+        <!-- Main -->
+        <button id="btn_logout" onclick="location.href= window.location.protocol + '//' + window.location.host + '/logout'" style="width: 100%; margin-top: 1em;">Logout</button>
+    </div>
+
+
+</body>
+</html>

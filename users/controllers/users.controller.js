@@ -65,6 +65,18 @@ exports.patchById = (req, res) => {
         //     return;
         // }
     }
+    if(req.body.userName) {
+        UserModel.checkEmailAvailable(req.body.email)
+            .then(() => {
+                res.status(406).send({userName: "not available"});
+            }).catch(() => {
+            UserModel.patchUser(req.params.userId, req.body)
+                .then((result) => {
+                    res.status(204).send({});
+                });
+        });
+        return;
+    }
     // console.log(req.body);
     UserModel.patchUser(req.params.userId, req.body)
         .then((result) => {
@@ -81,6 +93,11 @@ exports.removeById = (req, res) => {
     }
 };
 
+exports.listByName = (req, res) => {
+    UserModel.listByName(req.params.search).then((result) => {
+        res.status(200).send(result);
+    });
+}
 
 exports.getByIdUserData = (req, res) => {
     UserModel.findById(req.params.userId)
@@ -104,6 +121,29 @@ exports.followUser = (req, res) => {
             })
         }).then(() => {
             UserModel.addfollowUser(req.params.userId, req.params.followerid)
+            .then(() => {
+                res.status(200).send({});
+            });}
+        ).catch(() => {
+            res.status(304).send({});
+        });
+};
+
+
+exports.unfollowUser = (req, res) => {
+    new Promise((resolve, reject) => {
+        UserModel.findById(req.params.userId)
+            .then((result) => {
+                delete result.email;
+                for (let index = 0; index < result.follow.length; index++) {
+                    if(result.follow[index] != req.params.followerid) {
+                        return reject();
+                    }
+                }
+                resolve();
+            })
+        }).then(() => {
+            UserModel.removefollowUser(req.params.userId, req.params.followerid)
             .then(() => {
                 res.status(200).send({});
             });}

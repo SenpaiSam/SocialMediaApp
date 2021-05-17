@@ -7,45 +7,38 @@
     <title>uLife</title>
 </head>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>
-    [ulife] { 
-        --Background: #051A29;
-        
-        --Primary: 0, 167, 163;
-        
-        --Secondary: 3, 218, 198;
-        /*Typography and iconography*/
-        --OnBackground: 255, 255, 255;
-        --OnSurface: 255, 255, 255;
-        --OnPrimary: 0, 0, 0;
-        --OnSecondary: 0, 0, 0;
-        
-        --hover: brightness(80%);
-        background-color: var(--Background);
-        /* background-color: #181818; */
-        color: rgba(var(--OnBackground),var(--High-emphasis));
-    }
-    body {
-        --padding-component: 1em !important;
-    }
-</style>
+<link href="custom-colortheme.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-style.min.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-style.min.css"> -->
-<body ulife>
-    <div name="DEVtools" style="position: absolute;bottom: 1vh;left: 1vw;background-color: rgba(0,  0, 0, 0.5);padding: 1em;">
-        <h3 style="margin: 0; margin-bottom: 0.4em;">Dev Tool</h3>
-        <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
-        <select class="pointer" onchange="themecolor(this.value)">
-            <option value="light">light theme</option>
-            <option value="dark">dark theme</option>
-            <option value="blue">blue theme</option>
-            <option value="skin">skin theme</option>
-            <option value="greyish">greyish theme</option>
-            <option value="ulife" selected>ulife theme</option>
-        </select>
-        <br><br>
-        <p style="margin: 0; margin-bottom: 0.4em;">Toogle Flat Design:</p>
-        <button onclick="flatswitch()">normal/flat Mode Switch</button>
+<link rel="stylesheet" href="ulife.css">
+<body dark>
+    <div id="infos_register" style="display: none;position: absolute;height: 100vh;width: 100vw;z-index: 49;background-color: rgba(0, 0, 0, 80%);">
+        <div class="card vertical-center" style="width: 50vw;margin: 0 auto;background-color: var(--Background);">
+            <a style="float: right;" class="tweet-close color-primary" onclick="closeModal('infos_register')"><span class="material-icons" style="top:0.3em">close</span></a>
+            <h1>Info</h1>
+            <p>Dies ist eine Website für ein GTA V Roleplay Server!</p>
+            <h1>Account</h1>
+            <p>Um ein User Account anzumelden, erreichen sie uns unter: 555-000-000</p>
+        </div>
+    </div>
+
+    <div id="designmodal" style="display: none;position: absolute;height: 100vh;width: 100vw;z-index: 49;background-color: rgba(0, 0, 0, 80%);">
+        <div class="card vertical-center" style="width: 50vw;margin: 0 auto;background-color: var(--Background);">
+            <button style="float: right;" onclick="closeDesignModal()"><span class="material-icons">close</span></button>
+            <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
+            <select class="pointer" onchange="themecolor(this.value)">
+                <option value="" disabled selected>Select themecolor</option>
+                <option value="light">light theme</option>
+                <option value="dark">dark theme</option>
+                <option value="blue">blue theme</option>
+                <option value="skin">skin theme</option>
+                <option value="greyish">greyish theme</option>
+                <option value="ulife">ulife theme</option>
+            </select>
+            <br><br>
+            <p style="margin: 0; margin-bottom: 0.4em;">Toogle Flat Design:</p>
+            <button onclick="flatswitch()">normal/flat Mode Switch</button>
+        </div>
     </div>
 
     <header class="header" style="position: sticky;top: 0;background-color: var(--Background);z-index: 10;padding: 0;"> <!-- color-primary -->
@@ -54,11 +47,11 @@
             <svg height="25" width="80">
                 <text x="0" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 2rem;">U</text><text x="30" y="25" fill="#00a7a3" style="font-weight: bolder; font-size: 1.3rem;">LIFE</text>
               </svg>
-            <a onclick="test()" class="nav-link-special">Register</a>
+            <a onclick="openModal('infos_register')" class="nav-link-special">Register</a>
         </nav>
     </header>
 
-    <div style="width: 30%;margin: 0 auto;align-items: center;justify-content: center;">
+    <div style="width: 40%;margin: 0 auto;align-items: center;justify-content: center;">
         <div class="main-content">
             <h1>Login</h1>
             <div class="card post">
@@ -72,6 +65,9 @@
                     <button id="loginbtn" type="submit">Login</button>
                 </form>
             </div>
+        </div>
+        <div class="info-p" style="text-align: center;">
+            <p><span onclick="openDesignModal()">Design ändern</span> &bull; <span onclick="btn_Impressum()">Impressum & Datenschutz</span> &bull; <span onclick="btn_Policy()">Regeln</span> &bull; <span onclick="btn_About()">Über</span></p>
         </div>
     </div>
 </body>
@@ -90,7 +86,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function(response){
-                    location.href= window.location.protocol + "//" + window.location.host + "/profile"; // TODO: only redirect to host
+                    location.href= window.location.protocol + "//" + window.location.host;
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -100,6 +96,5 @@
         });
     });
 
-function test() {}
 </script>
 </html>

@@ -6,6 +6,7 @@ const userSchema = new Schema({
     profileName: String,
     email: String,
     password: String,
+    // userImage: String,
     phone: Number,
     permissionLevel: Number,
     verified: Boolean,
@@ -92,6 +93,19 @@ exports.removeById = (userId) => {
     });
 };
 
+exports.listByName = (search) => {
+    let data = [];
+    return User.find({$or: [{userName: { $regex: String(search) , $options: "i" }},{profileName: { $regex: String(search) , $options: "i" }}]}) //, profileName: { $regex: String(search) , $options: "i" }
+        .then((result) => {
+            if(result != null || result != undefined) {
+                for (let index = 0; index < result.length; index++) {
+                    data.push({"_id": String(result[index]._id), "userName": result[index].userName, "profileName": result[index].profileName});   
+                }
+                return data;
+            }
+        }) // https://docs.mongodb.com/manual/reference/operator/query/regex/
+};
+
 exports.checkEmailAvailable = (emailtocheck) => {
     return new Promise((resolve, reject) => {
         User.findOne({ email: `${emailtocheck}` }, (err, result) => {
@@ -122,5 +136,14 @@ exports.addfollowUser = (id, followerid) => {
     }, {$push: {follow: followerid}}),
     User.findOneAndUpdate({
         _id: followerid
-    }, {$push: {follower: id, notifications: {userid: id, action: 'like', message: null, timestamp: new Date()}}})])
+    }, {$push: {follower: id, notifications: {userid: id, action: 'like', message: null, timestamp: new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/London"}))}}})]);
+};
+
+exports.removefollowUser = (id, followerid) => {
+    return Promise.all([User.findOneAndUpdate({
+        _id: id
+    }, {$pull: {follow: followerid}}),
+    User.findOneAndUpdate({
+        _id: followerid
+    }, {$pull: {follower: id}})]);
 };

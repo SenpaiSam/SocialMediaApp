@@ -1,0 +1,20 @@
+[ulife] { 
+    --Background: #051A29;
+    
+    --Primary: 0, 167, 163;
+    
+    --Secondary: 3, 218, 198;
+    /*Typography and iconography*/
+    --OnBackground: 255, 255, 255;
+    --OnSurface: 255, 255, 255;
+    --OnPrimary: 0, 0, 0;
+    --OnSecondary: 0, 0, 0;
+    
+    --hover: brightness(80%);
+    background-color: var(--Background);
+    /* background-color: #181818; */
+    color: rgba(var(--OnBackground),var(--High-emphasis));
+}
+body {
+    --padding-component: 1em !important;
+}

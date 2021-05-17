@@ -34,3 +34,15 @@ app.use(express.static('public'));
 app.listen(config.port, function () {
     console.log('app listening at port %s', config.port);
 });
+
+// const https = require('https');
+// const fs = require('fs');
+
+// const options = {
+//   key: fs.readFileSync('key.pem'),
+//   cert: fs.readFileSync('cert.pem')
+// };
+//var server = https.createServer(options, app);
+// server.listen(config.port, () => {
+//     console.log('app listening at port %s', config.port);
+// });

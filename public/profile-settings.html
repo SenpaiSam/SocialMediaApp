@@ -4,35 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>uLife</title>
 </head>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>
-    [ulife] { 
-        --Background: #051A29;
-        
-        --Primary: 0, 167, 163;
-        
-        --Secondary: 3, 218, 198;
-        /*Typography and iconography*/
-        --OnBackground: 255, 255, 255;
-        --OnSurface: 255, 255, 255;
-        --OnPrimary: 0, 0, 0;
-        --OnSecondary: 0, 0, 0;
-        
-        --hover: brightness(80%);
-        background-color: var(--Background);
-        /* background-color: #181818; */
-        color: rgba(var(--OnBackground),var(--High-emphasis));
-    }
-    body {
-        --padding-component: 1em !important;
-    }
-</style>
+<link href="custom-colortheme.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-style.min.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-style.min.css"> -->
 <link rel="stylesheet" href="ulife.css">
-<body ulife>
+<body dark>
     <div name="DEVtools" style="position: absolute;bottom: 1vh;left: 1vw;background-color: rgba(0,  0, 0, 0.5);padding: 1em;">
         <h3 style="margin: 0; margin-bottom: 0.4em;">Dev Tool</h3>
         <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
@@ -83,71 +63,23 @@
             <div class="nav-collapse flex-wrap">
                 <ul class="navbar-nav">
                     <li>
-                        <a href="/" class="nav-link"><span class="material-icons micon">home</span>Home</a>
+                        <a href="/" rel="nofollow" class="nav-link"><span class="material-icons micon">home</span>Home</a>
                     </li>
                     <li>
-                        <a class="nav-link"><span class="material-icons micon">language</span>Global</a>
+                        <a href="/global" rel="nofollow" class="nav-link"><span class="material-icons micon">language</span>Global</a>
                     </li>
                     <li>
-                        <a class="nav-link"><span class="material-icons micon">notifications</span>Mitteilungen</a>
+                        <a id="notifications_btn" rel="nofollow" class="nav-link"><span class="material-icons micon">notifications</span>Mitteilungen</a>
                     </li>
                 </ul>
                 <div id="searchrecommendation">
+                    <!-- <button style="font-size: 0.45em;position: relative;top: 0.9em"><span class="material-icons">search</span></button> -->
                     <input type="search" name="nameinput" id="headersearch" style="width: 100%;" placeholder="Suche.." autocomplete="off"/> <!-- onkeydown="onkeydown1()" onsearch="onsearch1()" -->
-                    <ul class="search-recommendation">
-                        <li>
-                            <input type="hidden" value="Max Musterman @EinAcc">
-                            <div class="sr-profile-item">
-                                <div class="sr-profile-img vertical-center">
-                                    <img src="https://picsum.photos/40?random=8" style="border-radius: 100%;">
-                                </div>
-                                <div class="sr-profile-info">
-                                    <p>Max Musterman <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
-                                    <p>@MaxMusterman</p>
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                        <li>
-                            <input type="hidden" value="Alex Musterman @kexAcc">
-                            <div class="sr-profile-item">
-                                <div class="sr-profile-img vertical-center">
-                                    <img src="https://picsum.photos/40?random=9" style="border-radius: 100%;">
-                                </div>
-                                <div class="sr-profile-info">
-                                    <p>Alex Musterman der dritte</p>
-                                    <p>@kexAcc</p>
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                        <li>
-                            <input type="hidden" value="Ben Musterman @tenAcc">
-                            <div class="sr-profile-item">
-                                <div class="sr-profile-img vertical-center">
-                                    <img src="https://picsum.photos/40?random=10" style="border-radius: 100%;">
-                                </div>
-                                <div class="sr-profile-info">
-                                    <p>Ben Musterman <span style="font-size: 1em;" class="material-icons micon">verified</span></p>
-                                    <p>@tenAcc</p>
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                        <li>
-                            <input type="hidden" value="Zac Musterman @ZacAcc">
-                            <div class="sr-profile-item">
-                                <div class="sr-profile-img vertical-center">
-                                    <img src="https://picsum.photos/40?random=11" style="border-radius: 100%;">
-                                </div>
-                                <div class="sr-profile-info">
-                                    <p>Zac Musterman</p>
-                                    <p>@ZacAcc</p>
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                    </ul>
+                    <div style="position: relative;">
+                        <ul class="search-recommendation" id="search-recom"></ul>
+                    </div>
+                    <!-- <div id="searchDropdown" style="position: relative;float: right;top: 1.7em;right: 8em;">
+                    </div> -->
                 </div>
             </div>
             <a onclick="openSendModal()" class="nav-link-special">Posten</a>
@@ -155,23 +87,28 @@
     </header>
 
     <div class="flex-row" style="width: 70%;margin: 0 auto;align-items: center;justify-content: center;">
-        <div class="main-sticky">
+        <div class="main-sticky" style="max-width: 12em;">
             <div class="card profile-info">
                 <div class="profile-img">
-                    <img src="https://picsum.photos/200" style="max-height: 10em;height: auto;width: 100%;max-width: 10em;border-radius: 100%;">
+                    <img id="cUserImageView" src="" style="height: 10em;width: 10em;border-radius: 100%;">
                 </div>
-                <div>
-                    <h3 id="cprofilename">MyAccount</h3>
-                    <p id="cusername">@MyAccount</p>
+                <div id="leftProfileClick">
+                    <h3 id="cProfileName">MyAccount</h3>
+                    <p id="cUserName">@MyAccount</p>
                 </div>
             </div>
+            <input type="file" name="userimg" id="change_profile_image" class="inputfile" accept="image/png, image/jpeg" style="opacity: 0%;position: absolute;"/> <!-- accept=".jpg" -->
+            <label for="change_profile_image" style="width: 100%;margin-top: 1em;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                <span style="font-size: 0.8em;">Change profile image</span>
+            </label>
+            <button onclick="location.href= window.location.protocol + '//' + window.location.host + '/logout'" style="width: 100%; margin-top: 1em;">Logout</button>
         </div>
         <div class="main-content">
             <h1>Account</h1>
             <div class="card post">
-                <form id="accountsettings">
+                <form id="accountsettings" class="cform">
                     <label>Username:</label>
-                    <input id="username" placeholder="First name" style="width: 100%;">
+                    <input id="username" placeholder="First name" style="width: 100%;" readonly>
                     <br><br>
                     <label>Profilname:</label>
                     <input id="profilename" placeholder="Last name" style="width: 100%;">
@@ -191,18 +128,18 @@
             </div>
             <h1>Profil</h1>
             <div class="card post">
-                <form id="profilesettings">
+                <form id="profilesettings" class="cform">
                     <label>Bio:</label>
-                    <input id="bio" placeholder="Bio" style="width: 100%;">
+                    <input id="bio" placeholder="Bio" style="width: 100%;" maxlength="50">
                     <br><br>
                     <label>Website:</label>
-                    <input id="website" placeholder="Website" style="width: 100%;">
+                    <input id="website" placeholder="Website" style="width: 100%;" maxlength="30">
                     <br><br>
                     <label>Teleon:</label>
-                    <input id="phone" type="tel" placeholder="Telefon" style="width: 100%;">
+                    <input id="phone" type="tel" placeholder="Telefon" style="width: 100%;" maxlength="15">
                     <br><br>
                     <label>Ort:</label>
-                    <input id="location" placeholder="Ort" style="width: 100%;">
+                    <input id="location" placeholder="Ort" style="width: 100%;" maxlength="20">
                     <br><br>
                     <button type="submit">Speichern</button>
                 </form>
@@ -215,14 +152,23 @@
 <script src="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-javascript.min.js"></script>
 <script src="ulife.js"></script>
 <script>  
-
-    // function getCookie(name) {
-    //     const value = `; ${document.cookie}`;
-    //     const parts = value.split(`; ${name}=`);
-    //     if (parts.length === 2) return parts.pop().split(';').shift();
-    // }
-
     $(document).ready(() => {
+        // Just Public data
+        // let data = getUserData(getCookie('userid'));
+        // $('#cusername').val(data.userName);
+        // $('#cprofilename').val(data.profileName);
+
+        // $('#username').val(data.userName);
+        // $('#profilename').val(data.profileName);
+        // $('#email').val(data.email);
+        // $('#bio').val(data.bio);
+        // $('#website').val(data.website);
+        // $('#phone').val(data.phone);
+        // $('#location').val(data.location);
+        // let birthdaydate = new Date(data.birthday);
+        // $('#birthday').val(birthdaydate.toISOString().split('T')[0]);
+        // $('#UserImageView').attr('src', `${window.location.protocol}//${window.location.host}/userimages/${data.profileName}.jpg`);
+
         $.ajax({
             url: window.location.protocol + "//" + window.location.host + `/users/${getCookie("userid")}`, 
             method: 'GET',
@@ -232,8 +178,12 @@
             },
             success: function(response){
                 try {
-                    $('#cusername').val(response.userName);
-                    $('#cprofilename').val(response.profileName);
+                    $('#cUserImageView').attr('src', checkUserImage(response.profileName));
+                    $('#cProfileName').html(response.profileName);
+                    $('#cUserName').html('@'+response.userName);
+                    if(UserData.verified) {
+                        $('#cProfileName').append(` <span style="font-size: 1em;" class="material-icons micon">verified</span>`);
+                    }
 
                     $('#username').val(response.userName);
                     $('#profilename').val(response.profileName);
@@ -244,6 +194,7 @@
                     $('#location').val(response.location);
                     let birthdaydate = new Date(response.birthday);
                     $('#birthday').val(birthdaydate.toISOString().split('T')[0]);
+                    $('#UserImageView').attr('src', `${window.location.protocol}//${window.location.host}/userimages/${response.profileName}.jpg`);
                 } catch (e) {
                     console.log(e);
                 }
@@ -252,7 +203,7 @@
     });
     
     $("#accountsettings").on("submit", (event) => {
-        let changeData = {userName: $('#username').val(), profileName: $('#profilename').val(),email: $('#email').val(), birthday: $('#birthday').val()};
+        let changeData = {profileName: $('#profilename').val(), birthday: $('#birthday').val()}; //,email: $('#email').val()   userName: $('#username').val(), 
         $.ajax({
             url: window.location.protocol + "//" + window.location.host + `/users/${getCookie("userid")}`, 
             method: 'PATCH',
@@ -277,6 +228,32 @@
             data: JSON.stringify(changeData)
         });
         return false;
+    });
+
+    $("#change_profile_image").on("change", (event) => {
+        let file = document.getElementById('change_profile_image').files[0];
+        let blob = file.slice(0, file.size, 'image/jpg'); 
+
+        let newFile = new File([blob], `${getUserData(getCookie('userid')).profileName}.jpg`, {type: 'image/jpg'});
+        const fd = new FormData();
+        fd.append("userimg", newFile)
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/userimageupload`, 
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            headers: {
+                "Authorization": `Bearer ${getCookie('auth')}`
+            },
+            data: fd,
+            success: function(data){
+                location.href = `${window.location.protocol}//${window.location.host}/profile`;
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
     });
 </script>
 </html>

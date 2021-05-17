@@ -4,31 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>uLife</title>
 </head>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>
-    [ulife] { 
-        --Background: #051A29;
-        
-        --Primary: 0, 167, 163;
-        
-        --Secondary: 3, 218, 198;
-        /*Typography and iconography*/
-        --OnBackground: 255, 255, 255;
-        --OnSurface: 255, 255, 255;
-        --OnPrimary: 0, 0, 0;
-        --OnSecondary: 0, 0, 0;
-        
-        --hover: brightness(80%);
-        background-color: var(--Background);
-        /* background-color: #181818; */
-        color: rgba(var(--OnBackground),var(--High-emphasis));
-    }
-    body {
-        --padding-component: 1em !important;
-    }
-</style>
+<link href="custom-colortheme.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@782c665ffa5798a9a74e4207fcc8d940a5ffef64/sam-style.min.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SenpaiSam/CSSFramework@latest/sam-style.min.css"> -->
 <link rel="stylesheet" href="ulife.css">
@@ -37,12 +17,13 @@
         <h3 style="margin: 0; margin-bottom: 0.4em;">Dev Tool</h3>
         <p style="margin: 0; margin-bottom: 0.4em;">Color theme:</p>
         <select class="pointer" onchange="themecolor(this.value)">
+            <option value="" disabled selected>Select themecolor</option>
             <option value="light">light theme</option>
             <option value="dark">dark theme</option>
             <option value="blue">blue theme</option>
             <option value="skin">skin theme</option>
             <option value="greyish">greyish theme</option>
-            <option value="ulife" selected>ulife theme</option>
+            <option value="ulife">ulife theme</option>
         </select>
         <br><br>
         <p style="margin: 0; margin-bottom: 0.4em;">Toogle Flat Design:</p>
