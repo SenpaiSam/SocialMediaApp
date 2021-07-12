@@ -446,7 +446,7 @@ $('#create_commentbutton').on('click', () => {
 });
 
 $('#ccreate_comment2button').on('click', (e) => {
-    let postid = $('#Post_view > div').attr('id');
+    let postid = $('#Post_view').children(":first").attr('id');
     let formData = {message: $('#create_comment2content').val()};
     POSTcreateComment(postid, formData);
     location.href = location.href;
@@ -522,6 +522,7 @@ function loadPostComments(serverdata) {
 
 function loadPostComments2(serverdata) {
     $('#commentsfeed2').html('');
+    $('#commentsfeed2').append(`<div id="${serverdata._id}"></div>`);
     if(serverdata.postComments == null || !serverdata.postComments || serverdata.postComments.length == 0) {
         $('#commentsfeed2').append(`<p>Keine Kommentare!</p>`);
         return;
@@ -584,6 +585,10 @@ function PostView(postid) {
     $('#Post_view').html('');
     $('#Post_view').append(constructPost(serverdata));
     $("#Post_view").find("[name='postcommentsbtn']").remove();
+    if(serverdata.repost) {
+        loadPostComments2(GETsinglePost(serverdata.repostPostId));
+        return;
+    }
     loadPostComments2(serverdata);
 }
 
