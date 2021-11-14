@@ -3,45 +3,40 @@
 This sample is published as part of [the corresponding article](https://www.toptal.com/nodejs/secure-rest-api-in-nodejs) at the Toptal Engineering Blog. Visit https://www.toptal.com/developers/blog and subscribe to our newsletter to read great posts!
 
 ## Before using
-
-- Please make sure that you have:
- - Node.js installed (https://nodejs.org/)
  - MongoDB installed and running locally (https://www.mongodb.com/)
    - Using Windows, just open the terminal at where you installed mongo and run `mongod.exe`
  - Run `npm install` or `yarn` in your root project folder
 
-## Usage
 
-To run the project, please use a command line the following:
- - `npm start`
-    - It will run the server at port 3600.
+UI:
+- check if User info (Bio,Website,...) is empty string and dont show up {DONE}
+- return Default image or build default with css {DONE (default Image)}
+- Search Users (just load first 4 items) {DONE} <-- TEST IT
+- Post Comments {DONE}
+- check if Reposted by user (disable btn if Repost) / delete Repost if clicked again ?v0.1 {Checked but not showed in UI}
+
+- when hover over time show full time
+- follower list for User
+- notifications
+- Show number of likes (Done), Reposts, Comments
+- when on repost create no image and text input then repost it simple
+
+Server:
+- Delete Post {- Dont delete repost with content} {DONE}
+- Like / dislike {DONE}
+- Search Users {Look in Username and Profilename} {DONE}
+- Birthday format (just Date) {is ok}
+
+- dont load all notifications (do it like post.list)
+- Comments <-- 1 (+Delete <our own Comment) v0.1
 
 
-### 2019-09-13 update
+IDEE:
+- Post creation ui (Repost, img,...) [load picture if choosen] {dont work}
+- metions clientside -> neue Datenbank Zeile (array) [same by hashtags]
 
-- Refactored mongoose to a proper common service.
-- Added a Dockerfile and docker-compose configuration.
-
-If you are familiar to docker and you have docker installed on your machine and just want to run the project without issues please do:
-
- - docker-compose build
- - docker-compose up
- - It will run the mongodb at port 27017 (for testing purposes only).
- - It will run the server at port 3600.
-
-### 2020-02-01
-
-I've created a 2020 version of this project using Typescript. If you might be interested on it, please check the following repository: https://github.com/makinhs/expressjs-api-tutorial
-
-### 2020-09-09
-
-- Updated and pruned dependencies.
-- Fixed deprecation warnings.
-- Leveraged `findOneAndUpdate` to simplify PATCH code.
-- Changed default MongoDB server name to `localhost` to simplify first-time setup.
-- Checked that it works with the latest version of Node.js, 14.9.0.
-
-### 2020-11-14
-
-- Accepted changes in the docker file that was causing MongoDB issues on Windows Subsystem Linux (WSL2) - Ubuntu.
-- If you are new to this project, I highly recommend starting with Typescript first, like we talk about here: https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1
+TODO:
+- Dont throw error in console on UserImage check (?n)
+- Dont make it to Repost own Post (simple Repost) because on delete of repost the post deletes to (simple repost) {DONE}
+- Umfragen
+- Profilbild löschen
