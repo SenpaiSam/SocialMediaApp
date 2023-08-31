@@ -12,8 +12,7 @@ const options = {
     useFindAndModify: false
 };
 
-//var url = 'mongodb+srv://Samuel:admin2002@cluster0.0bkqq.mongodb.net/cluster0?retryWrites=true&w=majority'; //"mongodb://localhost:27017/rest-tutorial"
-var url = "mongodb+srv://tourguide:guide02@cluster0.0bkqq.mongodb.net/Cluster0?retryWrites=true&w=majority"; //"mongodb://localhost:27017/rest-tutorial"
+var url = "mongodb+srv://<username>:<password>@<clusterName>.mongodb.net/Cluster0?retryWrites=true&w=majority"; //"mongodb://localhost:27017/<name>"
 const connectWithRetry = () => {
     console.log('MongoDB connection with retry')
     mongoose.connect(url, options).then(()=>{

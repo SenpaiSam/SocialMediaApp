@@ -1,9 +1,5 @@
 //Add colortheme
-addthemecolor('ulife');
-
-// function setCookie(cookiename,cookievalue){
-//     document.cookie = cookiename + "=" + cookievalue;
-// }
+// addthemecolor('ulife');
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -43,7 +39,7 @@ $(document).ready(() => {
     $('#create_post_img').attr('src', checkUserImage(UserData.profileName));
     $('#comments_user_img').attr('src', checkUserImage(UserData.profileName));
     $('#comments_user_img2').attr('src', checkUserImage(UserData.profileName));
-    // TODO: Dont load allways all different Images
+    // TODO: Dont allways load all different Images
 })
 
 //#region Search
@@ -155,8 +151,8 @@ var activmodal = false;
 
 function openModal(id) {
     lastscrollheight = window.scrollY;
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     document.getElementById(id).style.display = 'block';
     document.body.style.overflow = 'hidden';
     activmodal = true;
@@ -186,8 +182,8 @@ function closeSendModal() {
 
 function openSendModal() {
     lastscrollheight = window.scrollY;
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     sendmodal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     activmodal = true;
@@ -212,8 +208,8 @@ function closeImageViewer() {
 }
 
 function openimageviewer(imgurl, element) {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     lookingattweet = element.parentNode.parentNode.parentNode.id;
     // console.log(lookingattweet)
     imageviewer.style.display = 'block';
@@ -239,8 +235,8 @@ function closePostModal() {
 
 function ShowPostModal() {
     lastscrollheight = window.scrollY;
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     postmodal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     activmodal = true;
@@ -265,8 +261,8 @@ function closeDesignModal() {
 
 function openDesignModal() {
     lastscrollheight = window.scrollY;
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     designmodal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
